@@ -28,8 +28,15 @@
     <form id="form-pago" class="formulario" novalidate>
       <header class="formulario__cabecera">
         <h1>Completa tu pago</h1>
-        <p class="total">Total a pagar <strong>$ 150.000</strong></p>
       </header>
+
+      <div class="campo">
+        <label for="total">Total a pagar (COP)</label>
+        <input id="total" name="total" type="number" inputmode="numeric"
+               min="1" step="1" placeholder="Ej. 150000"
+               aria-describedby="error-total" required>
+        <p class="campo__error" id="error-total" role="alert"></p>
+      </div>
 
       <div class="campo">
         <label for="numero">Número de tarjeta</label>
@@ -66,7 +73,7 @@
 
       <button type="submit" id="btn-pagar" class="boton">
         <span class="boton__spinner" aria-hidden="true"></span>
-        <span class="boton__texto" id="btn-texto">Pagar $ 150.000</span>
+        <span class="boton__texto" id="btn-texto">Pagar</span>
       </button>
 
       <div id="resultado" class="resultado" role="status" aria-live="polite" hidden></div>

@@ -5,6 +5,7 @@ const TIMEOUT_MS = 10000;
 
 const form = document.getElementById('form-pago');
 const campos = {
+  total: document.getElementById('total'),
   numero: document.getElementById('numero'),
   titular: document.getElementById('titular'),
   vence: document.getElementById('vence'),
@@ -63,6 +64,11 @@ function mostrarError(clave, mensaje) {
 
 function validar() {
   const errores = {};
+  const total = Number(campos.total.value);
+
+  if (!Number.isSafeInteger(total) || total <= 0) {
+    errores.total = 'Ingresa un total válido mayor que cero.';
+  }
 
   // Requisito principal: exactamente 16 caracteres en la tarjeta
   const numero = campos.numero.value.replace(/\s/g, '');
@@ -91,7 +97,7 @@ function validar() {
   Object.keys(campos).forEach((clave) => mostrarError(clave, errores[clave] || ''));
   const primera = Object.keys(errores)[0];
   if (primera) campos[primera].focus();
-  return { valido: !primera, numero };
+  return { valido: !primera, numero, total };
 }
 
 /* ---------- Estado de la interfaz ---------- */
@@ -125,7 +131,7 @@ form.addEventListener('submit', async (evento) => {
   if (boton.disabled) return;
 
   ocultarResultado();
-  const { valido, numero } = validar();
+  const { valido, numero, total } = validar();
   if (!valido) return; // no se envía ninguna petición HTTP
 
   setProcesando(true); // se deshabilita el botón antes de cualquier await
@@ -143,6 +149,7 @@ form.addEventListener('submit', async (evento) => {
         'Idempotency-Key': crypto.randomUUID(),
       },
       body: JSON.stringify({
+        total,
         numeroTarjeta: numero,
         titular: campos.titular.value.trim(),
         vencimiento: campos.vence.value,

@@ -96,14 +96,6 @@ body {
   font-size: 1.35rem;
 }
 
-.total {
-  margin: 0 0 22px;
-  color: var(--tinta-suave);
-  font-size: 0.95rem;
-}
-
-.total strong { color: var(--tinta); }
-
 .campo { margin-bottom: 16px; }
 
 .fila {
