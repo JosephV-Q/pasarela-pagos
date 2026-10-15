@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pago seguro · Pasarela de pagos</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="checkout">
+
+    <!-- Vista previa de la tarjeta (se actualiza mientras se escribe) -->
+    <div class="tarjeta" aria-hidden="true">
+      <div class="tarjeta__chip"></div>
+      <p class="tarjeta__numero" id="vista-numero">•••• •••• •••• ••••</p>
+      <div class="tarjeta__pie">
+        <div>
+          <span class="tarjeta__rotulo">Titular</span>
+          <span class="tarjeta__dato" id="vista-titular">----------------</span>
+        </div>
+        <div>
+          <span class="tarjeta__rotulo">Vence</span>
+          <span class="tarjeta__dato" id="vista-vence">07/31</span>
+        </div>
+      </div>
+    </div>
+
+    <form id="form-pago" class="formulario" novalidate>
+      <header class="formulario__cabecera">
+        <h1>Completa tu pago</h1>
+        <p class="total">Total a pagar <strong>$ 150.000</strong></p>
+      </header>
+
+      <div class="campo">
+        <label for="numero">Número de tarjeta</label>
+        <input id="numero" name="numeroTarjeta" type="text" inputmode="numeric"
+               autocomplete="cc-number" placeholder="1234 5678 9012 3456"
+               maxlength="19" aria-describedby="error-numero" required>
+        <p class="campo__error" id="error-numero" role="alert"></p>
+      </div>
+
+      <div class="campo">
+        <label for="titular">Nombre del titular</label>
+        <input id="titular" name="titular" type="text" autocomplete="cc-name"
+               placeholder="Como aparece en la tarjeta" maxlength="40"
+               aria-describedby="error-titular" required>
+        <p class="campo__error" id="error-titular" role="alert"></p>
+      </div>
+
+      <div class="fila">
+        <div class="campo">
+          <label for="vence">Vencimiento</label>
+          <input id="vence" name="vencimiento" type="text" inputmode="numeric"
+                 autocomplete="cc-exp" placeholder="MM/AA" maxlength="5"
+                 aria-describedby="error-vence" required>
+          <p class="campo__error" id="error-vence" role="alert"></p>
+        </div>
+        <div class="campo">
+          <label for="cvv">CVV</label>
+          <input id="cvv" name="cvv" type="password" inputmode="numeric"
+                 autocomplete="cc-csc" placeholder="123" maxlength="4"
+                 aria-describedby="error-cvv" required>
+          <p class="campo__error" id="error-cvv" role="alert"></p>
+        </div>
+      </div>
+
+      <button type="submit" id="btn-pagar" class="boton">
+        <span class="boton__spinner" aria-hidden="true"></span>
+        <span class="boton__texto" id="btn-texto">Pagar $ 150.000</span>
+      </button>
+
+      <div id="resultado" class="resultado" role="status" aria-live="polite" hidden></div>
+
+      <p class="nota">Simulación académica: ninguna tarjeta se cobra realmente.</p>
+    </form>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

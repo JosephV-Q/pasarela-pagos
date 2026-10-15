@@ -1,0 +1,14 @@
+{
+  "name": "pasarela-pagos",
+  "version": "1.0.0",
+  "description": "Simulación de una pasarela de pagos: API Express + formulario de checkout",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
