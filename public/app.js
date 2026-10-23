@@ -8,6 +8,7 @@ const campos = {
   total: document.getElementById('total'),
   numero: document.getElementById('numero'),
   titular: document.getElementById('titular'),
+  correo: document.getElementById('correo'), // Nuevo
   vence: document.getElementById('vence'),
   cvv: document.getElementById('cvv'),
 };
@@ -82,6 +83,17 @@ function validar() {
     errores.titular = 'Escribe el nombre tal como aparece en la tarjeta.';
   }
 
+    // Validación del correo electrónico
+  const correo = campos.correo.value.trim();
+  
+  const formatoCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  
+  if (!correo) {
+    errores.correo = 'El correo electrónico es obligatorio.';
+  } else if (!formatoCorreo.test(correo)) {
+    errores.correo = 'Ingresa un correo electrónico válido. Ejemplo: usuario@correo.com.';
+  }
+  
   const venc = /^(\d{2})\/(\d{2})$/.exec(campos.vence.value);
   if (!venc || Number(venc[1]) < 1 || Number(venc[1]) > 12) {
     errores.vence = 'Usa el formato MM/AA.';
